@@ -19,7 +19,7 @@ class TodoContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+      padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
       child: Container(
         width: double.infinity ,
         decoration: BoxDecoration(

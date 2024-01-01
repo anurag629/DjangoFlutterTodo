@@ -7,6 +7,7 @@ import 'package:app/Constants/api.dart';
 import 'package:http/http.dart' as http;
 import 'package:app/Widgets/app_bar.dart';
 import 'package:app/Widgets/todo_container.dart';
+import 'package:app/Widgets/pie_chart.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -17,7 +18,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int complete = 0;
-  int incomplete = 0;
   List<Todo> myTodos = [];
   bool isLoading = true;
   void fetchData() async {
@@ -34,8 +34,6 @@ class _HomePageState extends State<HomePage> {
         );
         if (t.isDone) {
           complete++;
-        } else {
-          incomplete++;
         }
 
         myTodos.add(t);
@@ -46,7 +44,6 @@ class _HomePageState extends State<HomePage> {
       });
       if (kDebugMode) {
         print("Complete: $complete");
-        print("Incomplete: $incomplete");
         // print(myTodos.length);
         // print(response.body);
       }
@@ -69,22 +66,30 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(),
-      body: isLoading
+      body: Column(
+        children: [
+          PieChartWidget(
+            complete: complete,
+            total: myTodos.length,
+          ),
+          isLoading
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : ListView.builder(
-              itemCount: myTodos.length,
-              itemBuilder: (context, index) {
+          : Column(
+              children: myTodos.map((todo) {
                 return TodoContainer(
-                  id: myTodos[index].id,
-                  title: myTodos[index].title,
-                  desc: myTodos[index].desc,
-                  isDone: myTodos[index].isDone,
-                  date: myTodos[index].date,
+                  id: todo.id,
+                  title: todo.title,
+                  desc: todo.desc,
+                  isDone: todo.isDone,
+                  date: todo.date,
                 );
-              },
+              }).toList(),
             ),
+        ],
+      )
+      
     );
   }
 }
