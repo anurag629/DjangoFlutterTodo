@@ -66,28 +66,30 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(),
-      body: Column(
-        children: [
-          PieChartWidget(
-            complete: complete,
-            total: myTodos.length,
-          ),
-          isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : Column(
-              children: myTodos.map((todo) {
-                return TodoContainer(
-                  id: todo.id,
-                  title: todo.title,
-                  desc: todo.desc,
-                  isDone: todo.isDone,
-                  date: todo.date,
-                );
-              }).toList(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            PieChartWidget(
+              complete: complete,
+              total: myTodos.length,
             ),
-        ],
+            isLoading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : Column(
+                children: myTodos.map((todo) {
+                  return TodoContainer(
+                    id: todo.id,
+                    title: todo.title,
+                    desc: todo.desc,
+                    isDone: todo.isDone,
+                    date: todo.date,
+                  );
+                }).toList(),
+              ),
+          ],
+        ),
       )
       
     );
