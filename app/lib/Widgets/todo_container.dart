@@ -6,29 +6,32 @@ class TodoContainer extends StatelessWidget {
   final String desc;
   final bool isDone;
   final String date;
+  final Function onPress;
 
-  const TodoContainer(
-      {Key? key,
+  const TodoContainer({
+      Key? key,
       required this.id,
       required this.title,
       required this.desc,
       required this.isDone,
-      required this.date})
+      required this.date,
+      required this.onPress
+      })
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+      padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
       child: Container(
-        width: double.infinity ,
+        width: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.blueGrey[900],
+          color: Color.fromARGB(255, 243, 162, 70),
           borderRadius: BorderRadius.circular(10),
         ),
         child: ListTile(
           leading: CircleAvatar(
-            backgroundColor: Colors.blueGrey[900],
+            backgroundColor: Color.fromARGB(255, 243, 162, 70),
             child: isDone
                 ? const Icon(
                     Icons.check,
@@ -38,7 +41,7 @@ class TodoContainer extends StatelessWidget {
                     Icons.close,
                     color: Colors.white,
                   ),
-          ), 
+          ),
           title: Text(
             title.length > 15 ? '${title.substring(0, 15)}...' : title,
             style: const TextStyle(
@@ -54,9 +57,10 @@ class TodoContainer extends StatelessWidget {
               fontSize: 15,
             ),
           ),
+          // date and time
+          
           trailing: IconButton(
-            onPressed: () {
-            },
+            onPressed: () => onPress(),
             icon: const Icon(
               Icons.delete,
               color: Colors.white,
