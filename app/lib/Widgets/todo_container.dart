@@ -9,6 +9,112 @@ class TodoContainer extends StatelessWidget {
   final String date;
   final Function onPress;
 
+
+  void _showModel(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            height: MediaQuery.of(context).size.height / 2,
+            color: whitegreybg,
+            child: Center(
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    color: green,
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Add Todo',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: TextFormField(
+                      initialValue: title,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Title',
+                      ),
+                      // onSubmitted: (value) {
+                      //   setState(() {
+                      //     title = value;
+                      //   });
+                      // },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: TextFormField(
+                      initialValue: desc,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Description',
+                      ),
+                      // onSubmitted: (value) {
+                      //   setState(() {
+                      //     desc = value;
+                      //   });
+                      // },
+                    ),
+                  ),
+                  // Swithch for isDone
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Is Done?",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Switch(
+                          value: isDone,
+                          onChanged: (value) {
+                            // setState(() {
+                            //   isDone = value;
+                            // });
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: green,
+                      padding: const EdgeInsets.all(15.0),
+                    ),
+                    onPressed: null,
+                    child: const Text(
+                      "Update Todo",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   const TodoContainer({
       Key? key,
       required this.id,
@@ -25,9 +131,9 @@ class TodoContainer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
       child: InkWell(
-        onTap: () {
-          print("Container tapped");
-        },
+        onTap: () => _showModel(
+          context,
+        ),
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
