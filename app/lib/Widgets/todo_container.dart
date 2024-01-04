@@ -1,3 +1,4 @@
+import 'package:app/Constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class TodoContainer extends StatelessWidget {
@@ -23,47 +24,57 @@ class TodoContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Color.fromARGB(255, 243, 162, 70),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: ListTile(
-          leading: CircleAvatar(
-            backgroundColor: Color.fromARGB(255, 243, 162, 70),
-            child: isDone
-                ? const Icon(
-                    Icons.check,
-                    color: Colors.white,
-                  )
-                : const Icon(
-                    Icons.close,
-                    color: Colors.white,
-                  ),
+      child: InkWell(
+        onTap: () {
+          print("Container tapped");
+        },
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            // if isDone is true then color is green else color is red
+            color: isDone
+                ? green
+                : red,  
+            borderRadius: BorderRadius.circular(10),
           ),
-          title: Text(
-            title.length > 15 ? '${title.substring(0, 15)}...' : title,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+          child: ListTile(
+            leading: CircleAvatar(
+              backgroundColor: isDone
+                  ? green
+                  : red,
+              child: isDone
+                  ? const Icon(
+                      Icons.check,
+                      color: Colors.white,
+                    )
+                  : const Icon(
+                      Icons.close,
+                      color: Colors.white,
+                    ),
             ),
-          ),
-          subtitle: Text(
-            desc.length > 35 ? '${desc.substring(0, 35)}...' : desc,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 15,
+            title: Text(
+              title.length > 15 ? '${title.substring(0, 15)}...' : title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          // date and time
-          
-          trailing: IconButton(
-            onPressed: () => onPress(),
-            icon: const Icon(
-              Icons.delete,
-              color: Colors.white,
+            subtitle: Text(
+              desc.length > 35 ? '${desc.substring(0, 35)}...' : desc,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+              ),
+            ),
+            // date and time
+            
+            trailing: IconButton(
+              onPressed: () => onPress(),
+              icon: const Icon(
+                Icons.delete,
+                color: Colors.white,
+              ),
             ),
           ),
         ),

@@ -1,3 +1,4 @@
+import 'package:app/Constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 
@@ -23,8 +24,8 @@ class PieChartWidget extends StatelessWidget {
             chartLegendSpacing: 32,
             chartRadius: MediaQuery.of(context).size.width / 2.7,
             colorList: [
-              Colors.green,
-              Colors.red,
+              green,
+              red,
             ],
             initialAngleInDegree: 0,
             chartType: ChartType.ring,

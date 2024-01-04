@@ -1,3 +1,4 @@
+import "package:app/Constants/colors.dart";
 import "package:flutter/material.dart";
 
 AppBar customAppBar() {
@@ -11,7 +12,7 @@ AppBar customAppBar() {
       ),
     ),
     centerTitle: true,
-    backgroundColor: Color.fromARGB(255, 243, 162, 70),
+    backgroundColor: green,
     elevation: 0.0,
 
   );
